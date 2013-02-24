@@ -1,0 +1,73 @@
+=head1 NAME
+
+WebService::Zussar - Zussar API wrapper module for perl
+
+=head1 NOTICE
+
+This project has just launched development.
+
+=head1 SYNOPSIS
+
+  use WebService::Zussar;
+  
+  my $zussar = WebService::Zussar;
+  
+  # Request events
+  $zussar->fetch( 'events', keyword => 'perl' );
+  
+  # Print each event title
+  while (my $item = $atnd->next){
+  	print $item->title;
+  }
+
+=head1 INSTALLATION
+
+  $ git clone git://github.com/mugifly/WebService-Zussar.git
+  $ cpanm ./WebService-Zussar
+
+=head1 METHODS
+
+=head2 new ( [%params] )
+
+Create an instance of WebService::Zussar.
+
+%params = LWP::UserAgent options (It also optional).
+
+=head2 fetch ( $api_path [, %params] )
+
+Send request to Zussar API.
+
+$api_path = Path of request to Zussar API. Currently available: "event" only.
+
+%params = Query parameter.
+
+About the query, please see: http://www.zusaar.com/doc/api.html
+
+=head2 next
+
+=head2 prev
+
+=head2 iter
+
+=head1 SEE ALSO
+
+L<WebService::ATND> - https://github.com/ytnobody/WebService-ATND/
+
+L<DateTime::Format::ISO8601>
+
+L<Hash::AsObject>
+
+L<LWP::UserAgent>
+
+L<https://github.com/mugifly/WebService-Zussar/>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2013, Masanori Ohgita (http://ohgita.info/).
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+I wrote this library with referred to the library that was written by L<ytnobody|https://github.com/ytnobody>. Thank you.
+
+Thanks, Perl Mongers & CPAN authors. 
