@@ -9,6 +9,7 @@ use version;
 our $VERSION = qv('0.0.1');
 
 use base qw/Class::Accessor/;
+use Data::Recursive::Encode;
 use DateTime::Format::ISO8601;
 use Hash::AsObject;
 use JSON;
@@ -34,8 +35,7 @@ sub new {
 	# Parameter - Encoding (Char-set)
 	if(defined($param{encoding})){
 		$self->{encoding} = $param{encoding};
-	}else{
-		$self->{encoding} = 'utf8';
+		delete $param{encoding};
 	}
 
 	# Parameter - Automatic next page fetch 
@@ -72,6 +72,12 @@ sub new {
 sub fetch {
 	my ($self, $request_path, %query) = @_;
 
+	my $is_auto_fetch = 0;
+	if(defined($query{_is_auto_fetch})){
+		$is_auto_fetch = 1;
+		delete $query{_is_auto_fetch};
+	}
+
 	$self->{current_request_path} = $request_path;
 	$self->{current_query} = \%query || {};
 	$self->{current_query}->{count} = $self->{current_query}->{count} || 10; # Each fetch num of item
@@ -84,10 +90,30 @@ sub fetch {
 	}
 
 	# Decode JSON
-	my $js = JSON->new->utf8->decode($response->content);
+	my $js_hash = JSON->new->utf8->decode($response->content);
 
-	# Return iterator
-	return $self->_generate_events_iterator($js);
+	# Encoding
+	if(defined($self->{encoding}) && $self->{encoding} ne 'utf8'){
+		$js_hash = Data::Recursive::Encode->encode($self->{encoding}, $js_hash);
+	}
+
+	# Initialize the events store array
+	unless($is_auto_fetch){ # If not auto-fetch...
+		$self->{events} = [];
+	}
+
+	# Store events
+	foreach my $item(@{$js_hash->{event}}){
+		my $item_id = $item->{event_id};
+		push($self->{events}, $item);
+	}
+
+	# Reset iterator
+	unless($is_auto_fetch){
+		$self->iter(0);
+	}
+
+	return;
 }
 
 # Put to next a Iterator
@@ -95,7 +121,10 @@ sub next {
 	my $self = shift;
 
 	my $i = $self->iter();
+	if($i < 0){ $i = 0; }
+
 	if($i < @{$self->{events}}){
+		# Next one
 		$self->iter($i + 1);
 		# Return one event object
 		return $self->_generate_event_object($self->{events}->[$i]);
@@ -103,29 +132,28 @@ sub next {
 		# Fetch next page automatically
 		if($self->{nextpage_fetch} == 1 && @{$self->{events}} % $self->{current_query}->{count} == 0){
 			$self->{current_query}->{start} = $i;
+			$self->{current_query}->{_is_auto_fetch} = 1;
 			# Auto fetch
 			$self->fetch($self->{current_request_path}, $self->{current_query});
 			return $self->next();
 		}
-		return;
 	}
+	return;
 }
 
-# Generate Events iterator
-sub _generate_events_iterator {
-	my ($self, $js) = @_;
+# prev a Iterator
+sub prev {
+	my $self = shift;
 
-	# Initialize the events store array
-	$self->{events} = [];
+	my $i = $self->iter() - 1;
 
-	# Store events
-	foreach my $item(@{$js->{event}}){
-		my $item_id = $item->{event_id};
-		push($self->{events}, $item);
+	if(0 <= $i){
+		# Prev one
+		$self->iter($i);
+		# Return one event object
+		return $self->_generate_event_object($self->{events}->[$i]);
 	}
-
-	# Reset iterator
-	$self->iter(0);
+	return;
 }
 
 # Generate Event object from Hash
@@ -133,8 +161,10 @@ sub _generate_event_object {
 	my ($self, $hash) = @_;
 	
 	# Date parse
-	$hash->{started_at} = defined($hash->{started_at}) ? $self->{datetime_parser}->parse_datetime($hash->{started_at}) : undef;
-	$hash->{ended_at} = defined($hash->{ended_at}) ? $self->{datetime_parser}->parse_datetime($hash->{ended_at}) : undef;
+	$hash->{started} = defined($hash->{started_at}) ? $self->{datetime_parser}->parse_datetime($hash->{started_at}) : undef;
+	delete $hash->{started_at};
+	$hash->{ended} = defined($hash->{ended_at}) ? $self->{datetime_parser}->parse_datetime($hash->{ended_at}) : undef;
+	delete $hash->{ended_at};
 
 	return Hash::AsObject->new($hash);
 }

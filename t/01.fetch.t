@@ -33,6 +33,8 @@ my @expect_patterns = (
 	},
 );
 
+my $expect_patterns_i = 0;
+
 # Prepare a Test client
 my $client = sub {
 	my $baseurl = shift;
@@ -41,10 +43,45 @@ my $client = sub {
 	my $obj = WebService::Zussar->new(encoding => 'utf8', baseurl => $baseurl);
 	# Fetch events
 	$obj->fetch('events');
+
 	# Iterate a fetched events
-	while (my $event = $obj->next) {
+	while(my $event = $obj->next) {
 		# Compare values of item, with Expected pattern
-		my $ptn = shift @expect_patterns;
+		my $ptn = $expect_patterns[$expect_patterns_i];
+		foreach(keys %$ptn){
+			is($event->$_, $ptn->{$_}, "Item > $_");
+		}
+		$expect_patterns_i += 1;
+	}
+
+	# Reverse iterate a fetched events
+	$expect_patterns_i = @expect_patterns - 1;
+	while(my $event = $obj->prev) {
+		# Compare values of item, with Expected pattern
+		my $ptn = $expect_patterns[$expect_patterns_i];
+		foreach(keys %$ptn){
+			is($event->$_, $ptn->{$_}, "Item > $_");
+		}
+		$expect_patterns_i -= 1;
+	}
+
+	# Iterate a fetched events, only 1 item
+	{
+		my $event = $obj->next;
+		
+		# Compare values of item, with Expected pattern
+		my $ptn = $expect_patterns[0];
+		foreach(keys %$ptn){
+			is($event->$_, $ptn->{$_}, "Item > $_");
+		}
+	}
+
+	# Reverse iterate a fetched events, only 1 item
+	{
+		my $event = $obj->prev;
+		
+		# Compare values of item, with Expected pattern
+		my $ptn = $expect_patterns[0];
 		foreach(keys %$ptn){
 			is($event->$_, $ptn->{$_}, "Item > $_");
 		}
