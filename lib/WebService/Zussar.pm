@@ -196,7 +196,6 @@ sub _generate_get_url {
 
 1;
 __END__
-
 =head1 NAME
 
 WebService::Zussar - Zussar API wrapper module for perl
@@ -247,13 +246,17 @@ Create an instance of WebService::Zussar.
 Send request to Zussar API.
 Also, this method has supported a fetch like 'Auto-Pager'.
 
-$api_path = Path of request to Zussar API. Currently available: "event" or "event/user".
+=over 4
 
-%params = Query parameter.
+=item * $api_path = Path of request to Zussar API. Currently available: "event" or "event/user".
+
+=item * %params = Query parameter.
+
+=back
 
 About the query, please see: http://www.zusaar.com/doc/api.html
 
-=head3 'AutoPager' like fetching
+=head3 About the fetch like 'AutoPager' 
 
 You can fetch all search results, by such as this code:
 
@@ -268,11 +271,36 @@ You can fetch all search results, by such as this code:
 In the case of default, you can fetch max 10 items by single request to Zussar API.
 However, this module is able to fetch all results by repeat request, automatically.
 
+Also, you can disable this function, by specifying an option(disable_nextpage_fetch => 1) when call a constructor:
+
+  my $zussar = WebService::Zussar->new(disable_nextpage_fetch => 1);
+
+  # Request event
+  $zussar->fetch( 'event' );
+  
+  # Print each events title
+  while ( my $event = $zussar->next ){
+        print $event->title . "\n";
+  }
+
+In this case, you can fetch max 10 items.
+
+But also, you can fetch more items by causing a 'fetch' method again with 'start' parameter:
+
+  # Request the event of the remaining again
+  $zussar->fetch( 'event', start => 10 ); # Fetch continue after 10th items.
+
 =head2 next
+
+Get a next item, from the fetched items in instance.
 
 =head2 prev
 
+Get a previous item, from the fetched items in instance.
+
 =head2 iter
+
+set or get a position of iterator.
 
 =head1 SEE ALSO
 
