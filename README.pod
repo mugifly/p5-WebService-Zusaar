@@ -62,6 +62,7 @@ About the query, please see: http://www.zusaar.com/doc/api.html
 =head1 SEE ALSO
 
 L<WebService::ATND> - https://github.com/ytnobody/WebService-ATND/
+(Maybe you can use this library with an almost similar code.)
 
 L<DateTime::Format::ISO8601>
 
