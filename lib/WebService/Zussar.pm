@@ -202,16 +202,26 @@ WebService::Zussar - Zussar API wrapper module for perl
 
 =head1 SYNOPSIS
 
-  use WebService::Zussar;
+  use WebService::Zussar->new();
   
   my $zussar = WebService::Zussar;
   
-  # Request events
+  # Request event
   $zussar->fetch( 'event', keyword => 'perl' );
   
-  # Print each event title
-  while (my $item = $atnd->next){
-  	print $item->title;
+  # Print each events title
+  while (my $event = $zussar->next){
+        print $event->title . '\n';
+  }
+
+  # Request event/user
+  $zussar->fetch( 'event/user', event_id => '476003' );
+
+  while (my $event = $zussar->next){
+    # Print each users of event
+    foreach my $user(@{$event->users}){
+        print $user->nickname . '\n';
+    }
   }
 
 =head1 INSTALLATION

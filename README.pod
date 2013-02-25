@@ -8,7 +8,7 @@ This project has just launched development.
 
 =head1 SYNOPSIS
 
-  use WebService::Zussar;
+  use WebService::Zussar->new();
   
   my $zussar = WebService::Zussar;
   
@@ -16,17 +16,17 @@ This project has just launched development.
   $zussar->fetch( 'event', keyword => 'perl' );
   
   # Print each events title
-  while (my $event = $atnd->next){
-        print $event->title . '\n';
+  while (my $event = $zussar->next){
+        print $event->title . "\n";
   }
 
   # Request event/user
   $zussar->fetch( 'event/user', event_id => '476003' );
 
-  while (my $event = $atnd->next){
+  while (my $event = $zussar->next){
     # Print each users of event
     foreach my $user(@{$event->users}){
-        print $user->nickname . '\n';
+        print $user->nickname . "\n";
     }
   }
 
