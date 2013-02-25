@@ -166,6 +166,20 @@ sub _generate_event_object {
 	$hash->{ended} = defined($hash->{ended_at}) ? $self->{datetime_parser}->parse_datetime($hash->{ended_at}) : undef;
 	delete $hash->{ended_at};
 
+	# If fetch event/users
+	if(defined($hash->{users})){
+		foreach my $user(@{$hash->{users}}){
+			$user = $self->_generate_event_user_object($user);
+		}
+	}
+
+	return Hash::AsObject->new($hash);
+}
+
+# Generate Event/User object from Hash
+sub _generate_event_user_object {
+	my ($self, $hash) = @_;
+	
 	return Hash::AsObject->new($hash);
 }
 
