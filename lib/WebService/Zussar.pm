@@ -165,6 +165,8 @@ sub _generate_event_object {
 	delete $hash->{started_at};
 	$hash->{ended} = defined($hash->{ended_at}) ? $self->{datetime_parser}->parse_datetime($hash->{ended_at}) : undef;
 	delete $hash->{ended_at};
+	$hash->{updated} = defined($hash->{updated_at}) ? $self->{datetime_parser}->parse_datetime($hash->{updated_at}) : undef;
+	delete $hash->{updated_at};
 
 	# If fetch event/users
 	if(defined($hash->{users})){
