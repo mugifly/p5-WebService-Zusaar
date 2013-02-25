@@ -13,7 +13,7 @@ This project has just launched development.
   my $zussar = WebService::Zussar;
   
   # Request events
-  $zussar->fetch( 'events', keyword => 'perl' );
+  $zussar->fetch( 'event', keyword => 'perl' );
   
   # Print each event title
   while (my $item = $atnd->next){

@@ -15,7 +15,7 @@ use Data::Dumper;
 
 # Prepare the Test API response
 my $test_api = sub {
-	my $content = File::Slurp::read_file("$FindBin::Bin/data/sample_events.json");
+	my $content = File::Slurp::read_file("$FindBin::Bin/data/sample_event.json");
 	[ 200, [ 'Content-Type' => 'application/json' ], [ $content ] ];
 };
 
@@ -42,7 +42,7 @@ my $client = sub {
 	# Initialize a instance
 	my $obj = WebService::Zussar->new(encoding => 'utf8', baseurl => $baseurl);
 	# Fetch events
-	$obj->fetch('events');
+	$obj->fetch('event');
 
 	# Iterate a fetched events
 	while(my $event = $obj->next) {

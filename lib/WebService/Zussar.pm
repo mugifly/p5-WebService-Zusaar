@@ -83,7 +83,7 @@ sub fetch {
 	$self->{current_query}->{count} = $self->{current_query}->{count} || 10; # Each fetch num of item
 
 	# Request
-	my $url = $self->_generate_get_url($self->{baseurl}.'event/', %{$self->{current_query}});
+	my $url = $self->_generate_get_url($self->{baseurl}.$request_path.'/', %{$self->{current_query}});
 	my $response = $self->{ua}->get($url);
 	unless($response->is_success){
 		die 'Fetch error: '.$response->status_line;
@@ -191,7 +191,7 @@ WebService::Zussar - Zussar API wrapper module for perl
   my $zussar = WebService::Zussar;
   
   # Request events
-  $zussar->fetch( 'events', keyword => 'perl' );
+  $zussar->fetch( 'event', keyword => 'perl' );
   
   # Print each event title
   while (my $item = $atnd->next){

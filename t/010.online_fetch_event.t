@@ -27,7 +27,7 @@ my $expect_patterns_i = 0;
 # Initialize a instance
 my $obj = WebService::Zussar->new(encoding => 'utf8');
 # Fetch events
-$obj->fetch('events', keyword => 'Kansai.pm');
+$obj->fetch('event', keyword => 'Kansai.pm');
 
 # Iterate a fetched events
 while(my $event = $obj->next) {
