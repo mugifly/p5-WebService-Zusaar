@@ -40,7 +40,7 @@ my $client = sub {
 	my $baseurl = shift;
 
 	# Initialize a instance
-	my $obj = WebService::Zussar->new(encoding => 'utf8', baseurl => $baseurl);
+	my $obj = WebService::Zussar->new(baseurl => $baseurl);
 	# Fetch events
 	$obj->fetch('event');
 

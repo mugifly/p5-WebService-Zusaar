@@ -93,7 +93,7 @@ sub fetch {
 	my $js_hash = JSON->new->utf8->decode($response->content);
 
 	# Encoding
-	if(defined($self->{encoding}) && $self->{encoding} ne 'utf8'){
+	if(defined($self->{encoding})){
 		$js_hash = Data::Recursive::Encode->encode($self->{encoding}, $js_hash);
 	}
 
@@ -200,9 +200,13 @@ __END__
 
 WebService::Zussar - Zussar API wrapper module for perl
 
+=head1 NOTICE
+
+This project has just launched development.
+
 =head1 SYNOPSIS
 
-  use WebService::Zussar->new();
+  use WebService::Zussar->new( encoding => 'utf8' );
   
   my $zussar = WebService::Zussar;
   
@@ -210,17 +214,17 @@ WebService::Zussar - Zussar API wrapper module for perl
   $zussar->fetch( 'event', keyword => 'perl' );
   
   # Print each events title
-  while (my $event = $zussar->next){
-        print $event->title . '\n';
+  while ( my $event = $zussar->next ){
+        print $event->title . "\n";
   }
 
   # Request event/user
   $zussar->fetch( 'event/user', event_id => '476003' );
 
-  while (my $event = $zussar->next){
+  while ( my $event = $zussar->next ){
     # Print each users of event
-    foreach my $user(@{$event->users}){
-        print $user->nickname . '\n';
+    foreach my $user( @{$event->users} ){
+        print $user->nickname . "\n";
     }
   }
 
@@ -235,13 +239,13 @@ WebService::Zussar - Zussar API wrapper module for perl
 
 Create an instance of WebService::Zussar.
 
-%params = LWP::UserAgent options (It also optional).
+%params = (optional) LWP::UserAgent options, and encoding (example: encoding => 'utf8').
 
 =head2 fetch ( $api_path [, %params] )
 
 Send request to Zussar API.
 
-$api_path = Path of request to Zussar API. Currently available: "event" only.
+$api_path = Path of request to Zussar API. Currently available: "event" or "event/user".
 
 %params = Query parameter.
 
@@ -256,6 +260,7 @@ About the query, please see: http://www.zusaar.com/doc/api.html
 =head1 SEE ALSO
 
 L<WebService::ATND> - https://github.com/ytnobody/WebService-ATND/
+(Maybe you can use this library with an almost similar code.)
 
 L<DateTime::Format::ISO8601>
 

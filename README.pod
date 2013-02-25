@@ -8,7 +8,7 @@ This project has just launched development.
 
 =head1 SYNOPSIS
 
-  use WebService::Zussar->new();
+  use WebService::Zussar->new( encoding => 'utf8' );
   
   my $zussar = WebService::Zussar;
   
@@ -16,16 +16,16 @@ This project has just launched development.
   $zussar->fetch( 'event', keyword => 'perl' );
   
   # Print each events title
-  while (my $event = $zussar->next){
+  while ( my $event = $zussar->next ){
         print $event->title . "\n";
   }
 
   # Request event/user
   $zussar->fetch( 'event/user', event_id => '476003' );
 
-  while (my $event = $zussar->next){
+  while ( my $event = $zussar->next ){
     # Print each users of event
-    foreach my $user(@{$event->users}){
+    foreach my $user( @{$event->users} ){
         print $user->nickname . "\n";
     }
   }
@@ -41,7 +41,7 @@ This project has just launched development.
 
 Create an instance of WebService::Zussar.
 
-%params = LWP::UserAgent options (It also optional).
+%params = (optional) LWP::UserAgent options, and encoding (example: encoding => 'utf8').
 
 =head2 fetch ( $api_path [, %params] )
 
