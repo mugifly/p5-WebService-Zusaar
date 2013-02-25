@@ -119,6 +119,7 @@ sub fetch {
 # Put to next a Iterator
 sub next {
 	my $self = shift;
+	my $_is_disable_autofetch = shift || 0;
 
 	my $i = $self->iter();
 	if($i < 0){ $i = 0; }
@@ -130,12 +131,12 @@ sub next {
 		return $self->_generate_event_object($self->{events}->[$i]);
 	}else{
 		# Fetch next page automatically
-		if($self->{nextpage_fetch} == 1 && @{$self->{events}} % $self->{current_query}->{count} == 0){
+		if($self->{nextpage_fetch} == 1 && $_is_disable_autofetch == 0 && @{$self->{events}} % $self->{current_query}->{count} == 0){
 			$self->{current_query}->{start} = $i;
 			$self->{current_query}->{_is_auto_fetch} = 1;
 			# Auto fetch
-			$self->fetch($self->{current_request_path}, $self->{current_query});
-			return $self->next();
+			$self->fetch($self->{current_request_path}, %{$self->{current_query}});
+			return $self->next(1);
 		}
 	}
 	return;
@@ -244,12 +245,28 @@ Create an instance of WebService::Zussar.
 =head2 fetch ( $api_path [, %params] )
 
 Send request to Zussar API.
+Also, this method has supported a fetch like 'Auto-Pager'.
 
 $api_path = Path of request to Zussar API. Currently available: "event" or "event/user".
 
 %params = Query parameter.
 
 About the query, please see: http://www.zusaar.com/doc/api.html
+
+=head3 'AutoPager' like fetching
+
+You can fetch all search results, by such as this code:
+
+  # Request event
+  $zussar->fetch( 'event' );
+  
+  # Print each events title
+  while ( my $event = $zussar->next ){
+        print $event->title . "\n";
+  }
+
+In the case of default, you can fetch max 10 items by single request to Zussar API.
+However, this module is able to fetch all results by repeat request, automatically.
 
 =head2 next
 
