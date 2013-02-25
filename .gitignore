@@ -13,6 +13,7 @@ Makefile.old
 inc/
 Build
 MYMETA.yml
+MYMETA.json
 nytprof.out
 MANIFEST.bak
 blib/
