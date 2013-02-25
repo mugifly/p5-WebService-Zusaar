@@ -200,10 +200,6 @@ __END__
 
 WebService::Zussar - Zussar API wrapper module for perl
 
-=head1 NOTICE
-
-This project has just launched development.
-
 =head1 SYNOPSIS
 
   use WebService::Zussar->new( encoding => 'utf8' );
@@ -304,8 +300,7 @@ set or get a position of iterator.
 
 =head1 SEE ALSO
 
-L<WebService::ATND> - https://github.com/ytnobody/WebService-ATND/
-(Maybe you can use this library with an almost similar code.)
+L<https://github.com/mugifly/WebService-Zussar/> - Your feedback is highly appreciated.
 
 L<DateTime::Format::ISO8601>
 
@@ -313,7 +308,8 @@ L<Hash::AsObject>
 
 L<LWP::UserAgent>
 
-L<https://github.com/mugifly/WebService-Zussar/>
+L<WebService::ATND> - https://github.com/ytnobody/WebService-ATND/
+(Maybe you can use this library with an almost similar code.)
 
 =head1 COPYRIGHT AND LICENSE
 
