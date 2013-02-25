@@ -17,3 +17,5 @@ MYMETA.json
 nytprof.out
 MANIFEST.bak
 blib/
+MANIFEST.SKIP.bak
+WebService-Zussar-*/

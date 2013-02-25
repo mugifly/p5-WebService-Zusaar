@@ -1,12 +1,16 @@
 Build.PL
 Changes
 lib/WebService/Zussar.pm
+LICENSE
 Makefile.PL
-MANIFEST			This list of files
+MANIFEST
+META.json
+META.yml
 README.pod
 t/00.load.t
 t/01.fetch.t
 t/010.online_fetch.t
+t/data/sample_events.json
 t/perlcritic.t
 t/pod-coverage.t
 t/pod.t
