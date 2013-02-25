@@ -19,6 +19,7 @@ my $builder = Module::Build->new(
 		'LWP::UserAgent'				 => 0,
 		'URI'						 => 0,
 
+		'Module::Build'					 => 0,
 		'Test::Pod'		 			 => 0,
 		'Test::Pod::Coverage'		 => 1.08,
 		'File::Slurp'				 => 0,

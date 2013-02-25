@@ -30,6 +30,7 @@
             "Hash::AsObject" : "0",
             "JSON" : "0",
             "LWP::UserAgent" : "0",
+            "Module::Build" : "0",
             "Plack::Loader" : "0",
             "Test::More" : "0",
             "Test::Perl::Critic" : "0",
