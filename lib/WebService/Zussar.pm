@@ -105,7 +105,7 @@ sub fetch {
 	# Store events
 	foreach my $item(@{$js_hash->{event}}){
 		my $item_id = $item->{event_id};
-		push($self->{events}, $item);
+		push(@{$self->{events}}, $item);
 	}
 
 	# Reset iterator
