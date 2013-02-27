@@ -6,7 +6,7 @@ use Carp;
 use utf8;
 
 use version;
-our $VERSION = qv('0.0.2');
+our $VERSION = qv('0.0.3');
 
 use base qw/Class::Accessor/;
 use Data::Recursive::Encode;
@@ -162,12 +162,17 @@ sub _generate_event_object {
 	my ($self, $hash) = @_;
 	
 	# Date parse
-	$hash->{started} = defined($hash->{started_at}) ? $self->{datetime_parser}->parse_datetime($hash->{started_at}) : undef;
-	delete $hash->{started_at};
-	$hash->{ended} = defined($hash->{ended_at}) ? $self->{datetime_parser}->parse_datetime($hash->{ended_at}) : undef;
-	delete $hash->{ended_at};
-	$hash->{updated} = defined($hash->{updated_at}) ? $self->{datetime_parser}->parse_datetime($hash->{updated_at}) : undef;
-	delete $hash->{updated_at};
+	unless(defined($hash->{started})){
+		$hash->{started} = defined($hash->{started_at}) ? $self->{datetime_parser}->parse_datetime($hash->{started_at}) : undef;
+	}
+
+	unless(defined($hash->{ended})){
+		$hash->{ended} = defined($hash->{ended_at}) ? $self->{datetime_parser}->parse_datetime($hash->{ended_at}) : undef;
+	}
+
+	unless(defined($hash->{updated})){
+		$hash->{updated} = defined($hash->{updated_at}) ? $self->{datetime_parser}->parse_datetime($hash->{updated_at}) : undef;
+	}
 
 	# If fetch event/users
 	if(defined($hash->{users})){
@@ -202,9 +207,9 @@ WebService::Zussar - Zussar API wrapper module for perl
 
 =head1 SYNOPSIS
 
-  use WebService::Zussar->new( encoding => 'utf8' );
+  use WebService::Zussar;
   
-  my $zussar = WebService::Zussar;
+  my $zussar = WebService::Zussar->new( encoding => 'utf8' );
   
   # Request event
   $zussar->fetch( 'event', keyword => 'perl' );
@@ -224,7 +229,7 @@ WebService::Zussar - Zussar API wrapper module for perl
     }
   }
 
-=head1 INSTALLATION
+=head1 INSTALLATION (from GitHub)
 
   $ git clone git://github.com/mugifly/WebService-Zussar.git
   $ cpanm ./WebService-Zussar
@@ -289,6 +294,17 @@ But also, you can fetch more items by causing a 'fetch' method again with 'start
 =head2 next
 
 Get a next item, from the fetched items in instance.
+
+The item that you got is an object.
+
+You can use the getter-methods (same as a API response fields name, such as: 'title', 'event_id', 'catch', etc...) 
+
+ my $event = $zussar->next; # Get a next one item
+ print $event->title . "\n"; # Output a 'title' (included in this item)
+
+In addition, you can also use a following getter-methods : 'started', 'ended', 'updated'.
+
+So, these methods return the each object as the 'DateTime::Format::ISO8601', from 'started_at', 'ended_at' and 'updated_at' field.
 
 =head2 prev
 
