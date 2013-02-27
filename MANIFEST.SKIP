@@ -1,5 +1,8 @@
 ^.travis\.yml
 ^WebService\-Zussar\-.*/.*
+^WebService\-Zussar\-v.+\.tar\.gz
+
+^\.shipit$
 
 #!start included /usr/share/perl5/vendor_perl/ExtUtils/MANIFEST.SKIP
 # Avoid version control files.

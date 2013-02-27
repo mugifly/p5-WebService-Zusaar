@@ -13,6 +13,6 @@ t/010.online_fetch_event.t
 t/02.fetch_event_user.t
 t/data/sample_event.json
 t/data/sample_event_user.json
-t/perlcritic.t
-t/pod-coverage.t
-t/pod.t
+xt/01_pod.t
+xt/02_pod-coverage.t
+xt/10_perlcritic.t

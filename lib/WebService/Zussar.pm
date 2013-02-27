@@ -6,7 +6,7 @@ use Carp;
 use utf8;
 
 use version;
-our $VERSION = qv('0.0.1');
+our $VERSION = qv('0.0.2');
 
 use base qw/Class::Accessor/;
 use Data::Recursive::Encode;

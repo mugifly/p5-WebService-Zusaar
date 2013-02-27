@@ -45,7 +45,7 @@
    "provides" : {
       "WebService::Zussar" : {
          "file" : "lib/WebService/Zussar.pm",
-         "version" : "v0.0.1"
+         "version" : "v0.0.2"
       }
    },
    "release_status" : "stable",
@@ -54,5 +54,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "v0.0.1"
+   "version" : "v0.0.2"
 }
