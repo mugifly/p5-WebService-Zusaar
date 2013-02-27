@@ -4,9 +4,9 @@ WebService::Zussar - Zussar API wrapper module for perl
 
 =head1 SYNOPSIS
 
-  use WebService::Zussar->new( encoding => 'utf8' );
+  use WebService::Zussar;
   
-  my $zussar = WebService::Zussar;
+  my $zussar = WebService::Zussar->new( encoding => 'utf8' );
   
   # Request event
   $zussar->fetch( 'event', keyword => 'perl' );
@@ -26,7 +26,7 @@ WebService::Zussar - Zussar API wrapper module for perl
     }
   }
 
-=head1 INSTALLATION
+=head1 INSTALLATION (from GitHub)
 
   $ git clone git://github.com/mugifly/WebService-Zussar.git
   $ cpanm ./WebService-Zussar
@@ -91,6 +91,17 @@ But also, you can fetch more items by causing a 'fetch' method again with 'start
 =head2 next
 
 Get a next item, from the fetched items in instance.
+
+The item that you got is an object.
+
+You can use the getter-methods (same as a API response fields name, such as: 'title', 'event_id', 'catch', etc...) 
+
+ my $event = $zussar->next; # Get a next one item
+ print $event->title . "\n"; # Output a 'title' (included in this item)
+
+In addition, you can also use a following getter-methods : 'started', 'ended', 'updated'.
+
+So, these methods return the each object as the 'DateTime::Format::ISO8601', from 'started_at', 'ended_at' and 'updated_at' field.
 
 =head2 prev
 
