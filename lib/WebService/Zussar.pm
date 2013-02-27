@@ -212,11 +212,11 @@ WebService::Zussar - Zussar API wrapper module for perl
   my $zussar = WebService::Zussar->new( encoding => 'utf8' );
   
   # Request event
-  $zussar->fetch( 'event', keyword => 'perl' );
+  $zussar->fetch( 'event', keyword => 'Kansai.pm' );
   
   # Print each events title
   while ( my $event = $zussar->next ){
-        print $event->title . "\n";
+        print $event->title . "(id:". $event->event_id .")\n";
   }
 
   # Request event/user
