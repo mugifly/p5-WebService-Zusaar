@@ -1,5 +1,8 @@
 Revision history for WebService-Zussar
 
-0.0.1  Mon Feb 25 20:45:00 2013
-       Initial release.
+0.0.2 Wed Feb 27 18:00:00 2013
+	* Fix(Test): Moved - perlcritic.t and test for POD
+
+0.0.1 Mon Feb 25 20:45:00 2013
+	* Initial release.
 
