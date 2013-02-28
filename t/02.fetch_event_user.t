@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use utf8;
 
-use WebService::Zussar;
+use WebService::Zusaar;
 
 use DateTime::Format::ISO8601;
 use File::Slurp qw//;
@@ -44,7 +44,7 @@ my $client = sub {
 	my $baseurl = shift;
 
 	# Initialize a instance
-	my $obj = WebService::Zussar->new(encoding => 'utf8', baseurl => $baseurl);
+	my $obj = WebService::Zusaar->new(encoding => 'utf8', baseurl => $baseurl);
 	
 	# Fetch event/user
 	$obj->fetch('event/user', event_id => '999999');

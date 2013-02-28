@@ -3,10 +3,10 @@ use warnings;
 use Module::Build;
 
 my $builder = Module::Build->new(
-	module_name         => 'WebService::Zussar',
+	module_name         => 'WebService::Zusaar',
 	license             => 'perl',
 	dist_author         => 'Masanori Ohgita (http://ohgita.info)',
-	dist_version_from   => 'lib/WebService/Zussar.pm',
+	dist_version_from   => 'lib/WebService/Zusaar.pm',
 	requires => {
 		'Test::More'					 => 0,
 		'version'					 => 0,
@@ -28,7 +28,7 @@ my $builder = Module::Build->new(
 		'Test::TCP'					 => 0,
 		'Test::Perl::Critic'			 => 0,
 	},
-	add_to_cleanup      => [ 'WebService-Zussar-*' ],
+	add_to_cleanup      => [ 'WebService-Zusaar-*' ],
 );
 
 $builder->create_build_script();

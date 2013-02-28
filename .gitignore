@@ -18,5 +18,5 @@ MANIFEST.bak
 blib/
 MANIFEST.SKIP.bak
 .shipit
-WebService-Zussar-*/
-WebService-Zussar-v*.tar.gz
+WebService-Zusaar-*/
+WebService-Zusaar-v*.tar.gz

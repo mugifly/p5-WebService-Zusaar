@@ -1,9 +1,9 @@
 Build.PL
 Changes
-lib/WebService/Zussar.pm
+lib/WebService/Zusaar.pm
 LICENSE
 Makefile.PL
-MANIFEST
+MANIFEST			This list of files
 META.json
 META.yml
 README.pod

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use utf8;
 
-use WebService::Zussar;
+use WebService::Zusaar;
 
 use DateTime::Format::ISO8601;
 
@@ -25,7 +25,7 @@ my @expect_patterns = (
 my $expect_patterns_i = 0;
 
 # Initialize a instance
-my $obj = WebService::Zussar->new();
+my $obj = WebService::Zusaar->new();
 # Fetch events
 $obj->fetch('event', keyword => 'Kansai.pm');
 

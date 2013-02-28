@@ -1,6 +1,6 @@
 ^.travis\.yml
-^WebService\-Zussar\-.*/.*
-^WebService\-Zussar\-v.+\.tar\.gz
+^WebService\-Zusaar\-.*/.*
+^WebService\-Zusaar\-v.+\.tar\.gz
 
 ^\.shipit$
 
@@ -75,5 +75,5 @@
 ^MANIFEST\.SKIP
 
 # Avoid archives of this distribution
-\bWebService-Zussar-[\d\.\_]+
+\bWebService-Zusaar-[\d\.\_]+
 

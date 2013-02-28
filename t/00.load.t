@@ -2,8 +2,8 @@
 use Test::More tests => 1;
 
 BEGIN {
-	use_ok( 'WebService::Zussar' );
+	use_ok( 'WebService::Zusaar' );
 }
 
-diag( "Testing WebService::Zussar $WebService::Zussar::VERSION" );
+diag( "Testing WebService::Zusaar $WebService::Zusaar::VERSION" );
 

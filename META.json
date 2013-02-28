@@ -1,5 +1,5 @@
 {
-   "abstract" : "Zussar API wrapper module for perl",
+   "abstract" : "The Zusaar API wrapper module for perl",
    "author" : [
       "Masanori Ohgita (http://ohgita.info)"
    ],
@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "WebService-Zussar",
+   "name" : "WebService-Zusaar",
    "prereqs" : {
       "configure" : {
          "requires" : {
@@ -43,9 +43,9 @@
       }
    },
    "provides" : {
-      "WebService::Zussar" : {
-         "file" : "lib/WebService/Zussar.pm",
-         "version" : "v0.0.3"
+      "WebService::Zusaar" : {
+         "file" : "lib/WebService/Zusaar.pm",
+         "version" : "v0.0.4"
       }
    },
    "release_status" : "stable",
@@ -54,5 +54,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "v0.0.3"
+   "version" : "v0.0.4"
 }

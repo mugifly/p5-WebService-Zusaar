@@ -1,4 +1,7 @@
-Revision history for WebService-Zussar
+Revision history for WebService-Zusaar
+
+0.0.4 Thu Feb 28 14:30:00 2013
+	* Fix: Namaspace WebService::Zusaar
 
 0.0.3 Wed Feb 27 22:18:00 2013
 	* Change(Docs)
